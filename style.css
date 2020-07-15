@@ -55,3 +55,68 @@ body{
   flex-direction: row;
   justify-content: space-between;
 }
+
+
+#super-hero-container{
+  display: flex;
+  justify-content: space-evenly;
+  width: 75%;
+  margin: auto;
+  padding-top: 50px;
+}
+
+#image{
+  width: 350px;
+  height: 250px;
+}
+
+#img{
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+#left{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: left;
+  width: 30%;
+}
+
+#main{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding-top: 25px;
+  width: 70%;
+}
+
+#hero-name{
+  font-size: 2rem;
+  font-weight: bold;
+  padding: 10px 0;
+}
+
+#right{
+  display: flex;
+  text-align: left;
+  justify-content: space-evenly;
+}
+
+#right div{
+  padding-top: 15px;
+}
+
+.heading{
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 10px 0;
+}
+
+#aliases{
+  max-width: 250px;
+  max-height: 100px;
+  overflow: auto;
+}

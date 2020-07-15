@@ -20,8 +20,17 @@ async function handleSearch(e){
         let item = document.createElement('div');
         item.className = "search-item";
         item.setAttribute('id', `${data.results[i].id}`);
-        item.innerHTML = data.results[i].name;
-        item.addEventListener('click', viewHeroPage);
+
+        let label = document.createElement('div');
+        label.innerHTML = data.results[i].name;
+        label.addEventListener('click', viewHeroPage);
+        item.appendChild(label);
+
+        let option = document.createElement('div');
+        option.innerHTML = "Add to favourites";
+        option.addEventListener('click', addToFavourites);
+        item.appendChild(option);
+
         searchResultsContainer.appendChild(item);
       }
     }
@@ -49,6 +58,21 @@ async function clearResults(){
 }
 
 async function viewHeroPage(e){
-  let path = `${window.location.pathname} + /../superhero.html#id=${e.target.id}`;
+  let path = `${window.location.pathname} + /../superhero.html#id=${e.target.parentElement.id}`;
   window.open(path);
+}
+
+async function addToFavourites(e){
+  let id = e.target.parentElement.id;
+  if(localStorage.getItem('favHeroList') == null){
+    let data = [];
+    localStorage.setItem('favHeroList', JSON.stringify(data));
+  }
+  let favHeros = JSON.parse(localStorage.getItem('favHeroList'));
+  if(!favHeros.includes(id)){
+    console.log(favHeros);
+    favHeros.push(id);
+    localStorage.setItem('favHeroList', JSON.stringify(favHeros));
+  }
+  console.log(localStorage.getItem('favHerosList'));
 }

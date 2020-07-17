@@ -16,6 +16,7 @@ async function handleSearch(e){
     let data = await fetchAsync(`${url}/search/${name}`);
     if(data && data.response === 'success'){
       searchResultsContainer.innerHTML = "";
+      let favs = getFavs();
       for(let i = 0; i < data.results.length; i++){
         let item = document.createElement('div');
         item.className = "search-item";
@@ -27,8 +28,14 @@ async function handleSearch(e){
         item.appendChild(label);
 
         let option = document.createElement('div');
-        option.innerHTML = "Add to favourites";
-        option.addEventListener('click', addToFavourites);
+        if(favs.includes(data.results[i].id)){
+          option.innerHTML = "Remove from favourites";
+          option.addEventListener('click', removeFromFavourites);  
+        }
+        else{
+          option.innerHTML = "Add to favourites";
+          option.addEventListener('click', addToFavourites);  
+        }
         item.appendChild(option);
 
         searchResultsContainer.appendChild(item);
@@ -64,15 +71,38 @@ async function viewHeroPage(e){
 
 async function addToFavourites(e){
   let id = e.target.parentElement.id;
-  if(localStorage.getItem('favHeroList') == null){
-    let data = [];
-    localStorage.setItem('favHeroList', JSON.stringify(data));
+  let favs = getFavs();
+  if(!favs.includes(id)){
+    favs.push(id);
   }
-  let favHeros = JSON.parse(localStorage.getItem('favHeroList'));
-  if(!favHeros.includes(id)){
-    console.log(favHeros);
-    favHeros.push(id);
-    localStorage.setItem('favHeroList', JSON.stringify(favHeros));
+  localStorage.setItem('favHeros', JSON.stringify(favs));
+  console.log(e.target);
+  e.target.innerHTML = 'Remove from favourites';
+  e.target.removeEventListener('click', addToFavourites);
+  e.target.addEventListener('click', removeFromFavourites);
+}
+
+async function removeFromFavourites(e){
+  let id = e.target.parentElement.id;
+  let favs = getFavs();
+
+  let updatedFavs = favs.filter(function(val){
+    return val != id;
+  })
+  localStorage.setItem('favHeros', JSON.stringify(updatedFavs));
+  e.target.innerHTML = 'Add to favourites';
+  e.target.removeEventListener('click', removeFromFavourites);
+  e.target.addEventListener('click', addToFavourites);
+}
+
+
+function getFavs(){
+  let favs;
+  if(localStorage.getItem('favHeros') === null){
+    favs = [];
   }
-  console.log(localStorage.getItem('favHerosList'));
+  else{
+    favs = JSON.parse(localStorage.getItem('favHeros'));
+  }
+  return favs; 
 }

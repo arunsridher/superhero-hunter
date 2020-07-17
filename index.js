@@ -76,7 +76,6 @@ async function addToFavourites(e){
     favs.push(id);
   }
   localStorage.setItem('favHeros', JSON.stringify(favs));
-  console.log(e.target);
   e.target.innerHTML = 'Remove from favourites';
   e.target.removeEventListener('click', addToFavourites);
   e.target.addEventListener('click', removeFromFavourites);

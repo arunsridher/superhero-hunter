@@ -7,8 +7,20 @@ function loadEventListeners(){
   searchBox.addEventListener('keyup', handleSearch);
 }
 
+async function handleEnter(name){
+  let data = await fetchAsync(`${url}/search/${name}`);
+  if(data.response === 'success'){
+    console.log(data);
+    let path = `${window.location.pathname} + /../superhero.html#id=${data.results[0].id}`;
+    window.open(path);  
+  }
+}
+
 async function handleSearch(e){
   let name = e.target.value.trim();
+  if(e.keyCode === 13 && name.length > 0){
+    handleEnter(name);
+  }
   if(name.length == 0){
     await clearResults();
   }

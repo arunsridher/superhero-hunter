@@ -4,7 +4,7 @@
 Create a superhero hunter app using only vanilla javascript.
 
 ## Set up and execution  
-  1. Clone the repository from [here](https://github.com/arunsridher/arunsridher.github.io.superhero)
+  1. Clone the repository from [here](https://github.com/arunsridher/superhero-hunter)
   2. Open the index.html file in your preferred browser
 
 ## Application flow

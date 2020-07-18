@@ -3,12 +3,14 @@ const img = document.getElementById("img");
 const powerstats = document.getElementById("powerstats");
 const bio = document.getElementById("bio");
 
+// call the update UI method when the window is loaded
 window.onload = function(){
   let winurl = window.location.href;
   let id = winurl.substring(winurl.lastIndexOf('=')+1);
   updateUI(id)
 }
 
+// update UI from fetched data
 async function updateUI(id){
   let url = `https://superheroapi.com/api.php/2928355607286861/${id}`
   let data = await fetchAsync(url);
@@ -33,6 +35,7 @@ async function updateUI(id){
   }
 }
 
+// fetch data from API
 async function fetchAsync (url) {
   try{
     let response = await fetch(url);

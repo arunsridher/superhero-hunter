@@ -1,6 +1,7 @@
 let favHeros = document.getElementById('favourite-heros');
 displayFavHeros();
 
+// display a list of favourite heros
 async function displayFavHeros(){
   let favs = getFavs();
   for(let i = 0; i < favs.length; i++){
@@ -33,6 +34,7 @@ async function displayFavHeros(){
   }
 }
 
+// fetch results from API
 async function fetchAsync (url) {
   try{
     let response = await fetch(url);
@@ -43,6 +45,7 @@ async function fetchAsync (url) {
   }
 }
 
+// get a list of favs
 function getFavs(){
   let favs;
   if(localStorage.getItem('favHeros') === null){
@@ -54,6 +57,7 @@ function getFavs(){
   return favs; 
 }
 
+// remove from favourites and remove the node from dom
 async function removeFromFavourites(e){
   console.log(e.target.parentElement.parentElement);
   let id = e.target.parentElement.parentElement.id;
